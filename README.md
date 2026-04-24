@@ -55,35 +55,30 @@ python3 Tyra-Ram.py
 ## **Toolkit Output**
 ```bash
 
-[>] Enter recipient email: your_email@gmail.com
 
+╔═══════════════════════════════════════════════════════════════════╗
+║                                                                   ║
+║      ███╗   ███╗ █████╗ ██╗██╗     ███████╗████████╗ ██████╗      ║
+║      ████╗ ████║██╔══██╗██║██║     ██╔════╝╚══██╔══╝██╔═══██╗     ║
+║      ██╔████╔██║███████║██║██║     █████╗     ██║   ██║   ██║     ║
+║      ██║╚██╔╝██║██╔══██║██║██║     ██╔══╝     ██║   ██║   ██║     ║
+║      ██║ ╚═╝ ██║██║  ██║██║███████╗███████╗   ██║   ╚██████╔╝     ║
+║      ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝      ║
+║                                                                   ║
+║              ⚡ M A I L S T O R M   P R O   v 1 . 0 ⚡           ║
+║              Ethical Email Testing | TyranRoot                    ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
 
+[!] Use only on YOUR OWN email!
+[✓] Rate Limit: Auto-protected | Delay: 3-5 sec
 
-╔════════════════════════════════════════════════════════════════════════╗
-║                         ⚙️  SELECT EMAIL COUNT                         ║
-╚════════════════════════════════════════════════════════════════════════╝
+[+] Gmail SMTP Ready
+[✓] Logged in as: tyranroot@gmail.com
 
-  [1] 10 emails     [6] 600 emails
-  [2] 50 emails     [7] 700 emails
-  [3] 100 emails    [8] 800 emails
-  [4] 200 emails    [9] 900 emails
-  [5] 500 emails    [10] 1000 emails
-  [11] Custom number
+==================================================
+[>] Target email:
 
-[>] Choose (1-11): 5
-
-
-╔════════════════════════════════════════════════════════════════════════╗
-║                      ⚠️  FINAL WARNING ⚠️                              ║
-╚════════════════════════════════════════════════════════════════════════╝
-
-  📊 Summary:
-     From: your_email@gmail.com
-     To: your_email@gmail.com
-     Emails: 500
-     Message Mode: RANDOM (Multi-Message)
-
-[?] Confirm you own this email? (yes/no): yes
 
 ```
 
