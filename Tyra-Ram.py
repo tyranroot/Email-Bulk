@@ -6,8 +6,8 @@ from colorama import Fore, Style, init
 
 init(autoreset=True)
 
-SENDER_EMAIL = "tyranrootcyber@gmail.com"
-SENDER_PASSWORD = "ofly uoqo drhw yatq"
+SENDER_EMAIL = "tyranroot@gmail.com"
+SENDER_PASSWORD = "zbmr utaf aukz pyzd"
 
 SUBJECTS = [
     "TEAM ATHEX",
