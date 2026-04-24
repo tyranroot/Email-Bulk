@@ -1,75 +1,151 @@
+#!/usr/bin/env python3
+
 import smtplib
+import time
+import random
+import sys
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import time
 from colorama import Fore, Style, init
 
 init(autoreset=True)
 
+# ==================== YOUR CREDENTIALS ====================
 SENDER_EMAIL = "tyranroot@gmail.com"
 SENDER_PASSWORD = "zbmr utaf aukz pyzd"
+# ============================================================
+
+# ==================== MESSAGE BODIES ====================
+MESSAGE_BODIES = [
+    "⚠️ Security Alert: Unauthorized access detected.",
+    "🔐 Your account has been compromised. Change password immediately.",
+    "💀 This is a security test. No action needed.",
+    "🎯 Important: Your login credentials were found in a data breach.",
+    "🌑 Your data has been secured. Thank you for your cooperation.",
+    "🔥 Our systems detected unusual activity from your IP.",
+    "📡 This is an automated security notification.",
+    "⚡ Action required: Verify your email address.",
+    "🕷️ A new device logged into your account.",
+    "🎭 Your privacy is important to us. Please review our policy.",
+    "🔓 Security update: Two-factor authentication now available.",
+    "📀 Your account has been flagged for review.",
+    "⚙️ System maintenance scheduled for tonight.",
+    "🎪 Welcome to our security awareness program.",
+    "🔮 We're here to help. Contact support if needed.",
+    "✅ This is a test. No response required.",
+    "📧 Your email is safe. This is a drill.",
+    "🔒 Security check: Please confirm your identity.",
+    "⚠️ Phishing attempt detected. Stay vigilant.",
+    "🛡️ Your account is protected by advanced security."
+]
 
 SUBJECTS = [
-    "TEAM ATHEX",
-] + [f"ATHEX {i}" for i in range(21, 501)]
+    "Security Alert",
+    "Account Notification",
+    "Important Security Update",
+    "System Report",
+    "Action Required",
+    "Security Breach Alert",
+    "Account Activity Report",
+    "Security Test",
+    "Notification from Security Team",
+    "Alert: Unusual Activity"
+]
 
-def send_emails(recipient_email, num_emails):
-    message_body = "Your security is an illusion.Your data is now our asset.Your systems have been marked.We move in shadows, strike without warning.Led by ATHEX, we don't make requests—we make statements.Ignore this at your own peril.TEAM ATHEX.Where others see walls, we see doors."
+def clear_screen():
+    import os
+    os.system('clear' if os.name == 'posix' else 'cls')
 
+def banner():
+    clear_screen()
+    print(f"""{Fore.MAGENTA}{Style.BRIGHT}
+╔══════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                      ║
+║      ███╗   ███╗ █████╗ ██╗██╗     ███████╗████████╗ ██████╗ ██████╗ ███╗   ███╗    ║
+║      ████╗ ████║██╔══██╗██║██║     ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗████╗ ████║    ║
+║      ██╔████╔██║███████║██║██║     █████╗     ██║   ██║   ██║██████╔╝██╔████╔██║    ║
+║      ██║╚██╔╝██║██╔══██║██║██║     ██╔══╝     ██║   ██║   ██║██╔══██╗██║╚██╔╝██║    ║
+║      ██║ ╚═╝ ██║██║  ██║██║███████╗███████╗   ██║   ╚██████╔╝██║  ██║██║ ╚═╝ ██║    ║
+║      ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝    ║
+║                                                                                      ║
+║                    ⚡ M A I L S T O R M   P R O   v 3 . 0 ⚡                          ║
+║                        Professional Email Stress Testing Tool                         ║
+║                           Coded by: TyraxZero | Ethical Only                          ║
+║                                                                                      ║
+╚══════════════════════════════════════════════════════════════════════════════════════╝
+{Style.RESET_ALL}""")
+    print(f"{Fore.YELLOW}{Style.BRIGHT}[!] WARNING: Use only on YOUR OWN email for testing!{Style.RESET_ALL}")
+    print(f"{Fore.YELLOW}{Style.BRIGHT}[!] Unauthorized use is ILLEGAL!{Style.RESET_ALL}\n")
+
+def send_email(server, recipient, subject, body):
+    """Send a single email"""
     try:
-        print(f"{Fore.CYAN}{Style.BRIGHT}[+] Connecting to Gmail SMTP as {SENDER_EMAIL}...")
+        msg = MIMEMultipart()
+        msg["From"] = SENDER_EMAIL
+        msg["To"] = recipient
+        msg["Subject"] = subject
+        msg.attach(MIMEText(body, "plain"))
+        server.sendmail(SENDER_EMAIL, recipient, msg.as_string())
+        return True
+    except Exception as e:
+        return False
+
+def main():
+    banner()
+    
+    print(f"{Fore.CYAN}{Style.BRIGHT}[+] Gmail SMTP Server Ready{Style.RESET_ALL}")
+    print(f"{Fore.GREEN}[✓] Logged in as: {SENDER_EMAIL}{Style.RESET_ALL}")
+    
+    print(f"\n{Fore.CYAN}{'='*60}{Style.RESET_ALL}")
+    
+    recipient = input(f"{Fore.CYAN}[>] Target email address: {Style.RESET_ALL}").strip()
+    count = int(input(f"{Fore.CYAN}[>] Number of emails (max 50): {Style.RESET_ALL}").strip())
+    
+    if count > 50:
+        print(f"{Fore.YELLOW}[!] Gmail limit is 50 per day. Reducing to 50.{Style.RESET_ALL}")
+        count = 50
+    
+    print(f"\n{Fore.RED}{Style.BRIGHT}[!] Sending {count} emails to {recipient}{Style.RESET_ALL}")
+    print(f"{Fore.CYAN}[*] Delay: 3 seconds between emails{Style.RESET_ALL}\n")
+    
+    confirm = input(f"{Fore.RED}[?] This is YOUR OWN email? (yes/no): {Style.RESET_ALL}")
+    if confirm.lower() != 'yes':
+        print(f"{Fore.GREEN}[+] Cancelled.{Style.RESET_ALL}")
+        return
+    
+    try:
         server = smtplib.SMTP("smtp.gmail.com", 587)
         server.starttls()
         server.login(SENDER_EMAIL, SENDER_PASSWORD)
-        print(f"{Fore.GREEN}{Style.BRIGHT}[✓] Logged in successfully.\n")
-    except smtplib.SMTPAuthenticationError:
-        print(f"{Fore.RED}{Style.BRIGHT}[❌] Login failed! Please check your Gmail App Password.")
-        print(f"{Fore.YELLOW}➡ Make sure 2-Step Verification is ON and you're using an App Password without spaces.")
-        return
+        print(f"{Fore.GREEN}[✓] Connected to Gmail SMTP{Style.RESET_ALL}\n")
     except Exception as e:
-        print(f"{Fore.RED}{Style.BRIGHT}[❌] Could not connect to Gmail SMTP: {e}")
+        print(f"{Fore.RED}[✗] Connection failed: {e}{Style.RESET_ALL}")
         return
-
-    start_time = time.time()
-
-    for i in range(num_emails):
-        try:
-            msg = MIMEMultipart()
-            msg["From"] = SENDER_EMAIL
-            msg["To"] = recipient_email
-            msg["Subject"] = SUBJECTS[i % len(SUBJECTS)]
-            msg.attach(MIMEText(message_body, "plain"))
-
-            server.sendmail(SENDER_EMAIL, recipient_email, msg.as_string())
-            print(f"{Fore.GREEN}{Style.BRIGHT}[✓] Sent email {i+1}/{num_emails} with subject: {msg['Subject']}")
-
-            time.sleep(0.1) 
-
-        except smtplib.SMTPResponseException as e:
-            if e.smtp_code == 421:
-                print(f"{Fore.YELLOW}{Style.BRIGHT}[⚠] Gmail rate-limited. Waiting 2 seconds...")
-                time.sleep(2)
-                continue
-            else:
-                print(f"{Fore.RED}[!] SMTP error sending email {i+1}: {e.smtp_error}")
-        except Exception as e:
-            print(f"{Fore.RED}[!] Error sending email {i+1}: {e}")
-
-    end_time = time.time()
-    print(f"\n{Fore.CYAN}{Style.BRIGHT}[✓] Finished sending {num_emails} emails in {end_time - start_time:.2f} seconds.")
-
+    
+    success = 0
+    failed = 0
+    
+    for i in range(1, count + 1):
+        subject = random.choice(SUBJECTS)
+        body = random.choice(MESSAGE_BODIES)
+        
+        if send_email(server, recipient, f"{subject} [ID: {i}]", body):
+            success += 1
+            print(f"{Fore.GREEN}[✓] Email {i}/{count} sent{Style.RESET_ALL}")
+        else:
+            failed += 1
+            print(f"{Fore.RED}[✗] Email {i}/{count} failed{Style.RESET_ALL}")
+        
+        time.sleep(3)
+    
     server.quit()
+    
+    print(f"\n{Fore.CYAN}{'='*60}{Style.RESET_ALL}")
+    print(f"{Fore.GREEN}[✓] COMPLETED: {success} sent, {failed} failed{Style.RESET_ALL}")
+    print(f"{Fore.CYAN}{'='*60}{Style.RESET_ALL}")
 
 if __name__ == "__main__":
-    print(f"{Fore.MAGENTA}{Style.BRIGHT}")
-    print("███████╗███╗   ███╗ █████╗ ██╗██╗    ██████╗  ██████╗ ███╗   ███╗██████╗ ███████╗██████╗                 ")
-    print("██╔════╝████╗ ████║██╔══██╗██║██║    ██╔══██╗██╔═══██╗████╗ ████║██╔══██╗██╔════╝██╔══██╗                ")
-    print("█████╗  ██╔████╔██║███████║██║██║    ██████╔╝██║   ██║██╔████╔██║██████╔╝█████╗  ██████╔╝                ")
-    print("██╔══╝  ██║╚██╔╝██║██╔══██║██║██║    ██╔══██╗██║   ██║██║╚██╔╝██║██╔══██╗██╔══╝  ██╔══██╗                ")
-    print("███████╗██║ ╚═╝ ██║██║  ██║██║██║    ██████╔╝╚██████╔╝██║ ╚═╝ ██║██████╔╝███████╗██║  ██║                ")
-    print("╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝    ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝    By A T H E X")
-    print(f"{Style.RESET_ALL}")
-    
-    recipient_email = input(f"{Fore.CYAN}Enter recipient Gmail: {Style.RESET_ALL}")
-    num_emails = int(input(f"{Fore.CYAN}Enter number of emails to send: {Style.RESET_ALL}"))
-    send_emails(recipient_email, num_emails)
+    try:
+        main()
+    except KeyboardInterrupt:
+        print(f"\n{Fore.YELLOW}[!] Stopped{Style.RESET_ALL}")
