@@ -3,17 +3,17 @@
 import smtplib
 import time
 import random
+import sys
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from colorama import Fore, Style, init
 
-# Initialize colorama
 init(autoreset=True)
 
-# ==================== YOUR CREDENTIALS (EDIT HERE) ====================
+# ==================== YOUR CREDENTIALS ====================
 SENDER_EMAIL = "tyranrootcyber@gmail.com"
 SENDER_PASSWORD = "xvwc tkej sigx lcxo"
-# =======================================================================
+# ============================================================
 
 # ==================== MESSAGE BODIES (Randomly Selected) ====================
 MESSAGE_BODIES = [
@@ -51,6 +51,33 @@ SUBJECTS = [
     "⚙️ Maintenance Alert"
 ]
 
+def clear_screen():
+    """Clear terminal screen"""
+    import os
+    os.system('clear' if os.name == 'posix' else 'cls')
+
+def banner():
+    clear_screen()
+    print(f"""{Fore.MAGENTA}{Style.BRIGHT}
+╔══════════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                          ║
+║      ███╗   ███╗ █████╗ ██╗██╗     ███████╗████████╗ ██████╗ ██████╗ ███╗   ███╗         ║
+║      ████╗ ████║██╔══██╗██║██║     ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗████╗ ████║         ║
+║      ██╔████╔██║███████║██║██║     █████╗     ██║   ██║   ██║██████╔╝██╔████╔██║         ║
+║      ██║╚██╔╝██║██╔══██║██║██║     ██╔══╝     ██║   ██║   ██║██╔══██╗██║╚██╔╝██║         ║
+║      ██║ ╚═╝ ██║██║  ██║██║███████╗███████╗   ██║   ╚██████╔╝██║  ██║██║ ╚═╝ ██║         ║
+║      ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝         ║
+║                                                                                          ║
+║                    ⚡ M A I L S T O R M   P R O   v 2 . 0 ⚡                            ║
+║                        Professional Email Stress Testing Tool                            ║
+║                        Coded by: TyraxZero | Ethical Use Only                            ║
+║                                                                                          ║
+╚══════════════════════════════════════════════════════════════════════════════════════════╝
+{Style.RESET_ALL}""")
+    print(f"{Fore.YELLOW}{Style.BRIGHT}[!] WARNING: Use only on YOUR OWN email for testing!{Style.RESET_ALL}")
+    print(f"{Fore.YELLOW}{Style.BRIGHT}[!] Unauthorized use is ILLEGAL!{Style.RESET_ALL}")
+    print(f"{Fore.CYAN}[✓] Status: Ready | Target: Protected Testing Mode{Style.RESET_ALL}\n")
+
 def generate_random_message():
     """Generate random message from the list"""
     return random.choice(MESSAGE_BODIES)
@@ -81,37 +108,45 @@ def send_emails(recipient_email, num_emails):
     start_time = time.time()
     success_count = 0
     failed_count = 0
+    daily_limit = 50  # Gmail free limit per day
+
+    if num_emails > daily_limit:
+        print(f"{Fore.YELLOW}[!] Warning: Gmail limit is {daily_limit} emails per day. Reducing to {daily_limit}.{Style.RESET_ALL}")
+        num_emails = daily_limit
 
     for i in range(1, num_emails + 1):
         try:
-            # Generate random content for each email
             message_body = generate_random_message()
             subject = generate_random_subject(i)
             
-            # Create email
             msg = MIMEMultipart()
             msg["From"] = SENDER_EMAIL
             msg["To"] = recipient_email
             msg["Subject"] = subject
             msg.attach(MIMEText(message_body, "plain"))
 
-            # Send email
             server.sendmail(SENDER_EMAIL, recipient_email, msg.as_string())
             success_count += 1
             
-            # Show progress with message preview
             preview = message_body[:50] + "..." if len(message_body) > 50 else message_body
             print(f"{Fore.GREEN}[✓] Email {i}/{num_emails} sent{Style.RESET_ALL}")
             print(f"    {Fore.CYAN}Subject:{Fore.WHITE} {subject}{Style.RESET_ALL}")
             print(f"    {Fore.CYAN}Message:{Fore.WHITE} {preview}{Style.RESET_ALL}\n")
 
-            time.sleep(0.15)  # Small delay to avoid rate limiting
+            time.sleep(3)  # 3 seconds delay to avoid rate limit
 
         except smtplib.SMTPResponseException as e:
-            if e.smtp_code == 421:
-                print(f"{Fore.YELLOW}[⚠] Rate limited. Waiting 3 seconds...{Style.RESET_ALL}")
-                time.sleep(3)
-                failed_count += 1
+            if e.smtp_code == 421 or e.smtp_code == 450 or e.smtp_code == 458:
+                print(f"{Fore.YELLOW}[⚠] Rate limited. Waiting 60 seconds...{Style.RESET_ALL}")
+                time.sleep(60)
+                # Retry once
+                try:
+                    server.sendmail(SENDER_EMAIL, recipient_email, msg.as_string())
+                    success_count += 1
+                    print(f"{Fore.GREEN}[✓] Email {i}/{num_emails} sent (after retry){Style.RESET_ALL}")
+                except:
+                    failed_count += 1
+                    print(f"{Fore.RED}[✗] Email {i}/{num_emails} failed (rate limit){Style.RESET_ALL}")
             else:
                 print(f"{Fore.RED}[!] SMTP error: {e.smtp_error}{Style.RESET_ALL}")
                 failed_count += 1
@@ -121,59 +156,36 @@ def send_emails(recipient_email, num_emails):
 
     end_time = time.time()
     
-    print(f"\n{Fore.CYAN}{Style.BRIGHT}{'='*50}{Style.RESET_ALL}")
-    print(f"{Fore.GREEN}[✓] COMPLETED!{Style.RESET_ALL}")
+    print(f"\n{Fore.CYAN}{Style.BRIGHT}{'='*60}{Style.RESET_ALL}")
+    print(f"{Fore.GREEN}{Style.BRIGHT}[✓] MAIL STORM COMPLETED!{Style.RESET_ALL}")
+    print(f"{Fore.CYAN}{'='*60}{Style.RESET_ALL}")
     print(f"{Fore.CYAN}[✓] Total Requested: {num_emails}{Style.RESET_ALL}")
     print(f"{Fore.GREEN}[✓] Successfully Sent: {success_count}{Style.RESET_ALL}")
     print(f"{Fore.RED}[✗] Failed: {failed_count}{Style.RESET_ALL}")
     print(f"{Fore.CYAN}[⏱️] Time taken: {end_time - start_time:.2f} seconds{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}{'='*50}{Style.RESET_ALL}")
+    print(f"{Fore.CYAN}{'='*60}{Style.RESET_ALL}")
 
     server.quit()
-
-def banner():
-    """Display professional banner"""
-    print(f"{Fore.MAGENTA}{Style.BRIGHT}")
-    print("╔═════════════════════════════════════════════════════════════════════════════╗")
-    print("║                                                                             ║")
-    print("║      ████████╗██╗   ██╗██████╗  █████╗     ██████╗ █████╗ ███╗   ███╗       ║")
-    print("║      ╚══██╔══╝╚██╗ ██╔╝██╔══██╗██╔══██╗    ██╔══██╗██╔══██╗████╗ ████║      ║")
-    print("║         ██║    ╚████╔╝ ██████╔╝███████║    ██████╔╝███████║██╔████╔██║      ║")
-    print("║         ██║     ╚██╔╝  ██╔══██╗██╔══██║    ██╔══██╗██╔══██║██║╚██╔╝██║      ║")
-    print("║         ██║      ██║   ██║  ██║██║  ██║    ██║  ██║██║  ██║██║ ╚═╝ ██║      ║")
-    print("║         ╚═╝      ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝      ║")
-    print("║                                                                             ║")
-    print("║                    ⚡ M A I L S T O R M   P R O   v 1 . 0 ⚡               ║")
-    print("║                        Multi-Message | Random Content                       ║")
-    print("║                           Coded by: TyraxZero                               ║")
-    print("║                         Educational Purpose Only                            ║")
-    print("╚═════════════════════════════════════════════════════════════════════════════╝")
-    print(f"{Style.RESET_ALL}")
-    print(f"{Fore.YELLOW}{Style.BRIGHT}[!] WARNING: Use only on YOUR OWN email for testing!{Style.RESET_ALL}")
-    print(f"{Fore.YELLOW}{Style.BRIGHT}[!] Unauthorized use is ILLEGAL!{Style.RESET_ALL}\n")
 
 def main():
     banner()
     
-    recipient_email = input(f"{Fore.CYAN}{Style.BRIGHT}[>] Enter recipient email: {Style.RESET_ALL}").strip()
+    recipient_email = input(f"{Fore.CYAN}{Style.BRIGHT}[>] Enter recipient email (YOUR OWN for testing): {Style.RESET_ALL}").strip()
     
     print(f"\n{Fore.CYAN}{Style.BRIGHT}╔════════════════════════════════════════════════════════════════════════╗{Style.RESET_ALL}")
     print(f"{Fore.CYAN}{Style.BRIGHT}║{Style.RESET_ALL}                         ⚙️  SELECT EMAIL COUNT                      {Fore.CYAN}{Style.BRIGHT}║{Style.RESET_ALL}")
     print(f"{Fore.CYAN}{Style.BRIGHT}╚════════════════════════════════════════════════════════════════════════╝{Style.RESET_ALL}\n")
     
-    print(f"  {Fore.GREEN}[1]{Style.RESET_ALL} 10 emails     {Fore.GREEN}[6]{Style.RESET_ALL} 600 emails")
-    print(f"  {Fore.GREEN}[2]{Style.RESET_ALL} 50 emails     {Fore.GREEN}[7]{Style.RESET_ALL} 700 emails")
-    print(f"  {Fore.GREEN}[3]{Style.RESET_ALL} 100 emails    {Fore.GREEN}[8]{Style.RESET_ALL} 800 emails")
-    print(f"  {Fore.GREEN}[4]{Style.RESET_ALL} 200 emails    {Fore.GREEN}[9]{Style.RESET_ALL} 900 emails")
-    print(f"  {Fore.GREEN}[5]{Style.RESET_ALL} 500 emails    {Fore.GREEN}[10]{Style.RESET_ALL} 1000 emails")
-    print(f"  {Fore.GREEN}[11]{Style.RESET_ALL} Custom number")
+    print(f"  {Fore.GREEN}[1]{Style.RESET_ALL} 10 emails")
+    print(f"  {Fore.GREEN}[2]{Style.RESET_ALL} 20 emails")
+    print(f"  {Fore.GREEN}[3]{Style.RESET_ALL} 30 emails")
+    print(f"  {Fore.GREEN}[4]{Style.RESET_ALL} 40 emails")
+    print(f"  {Fore.GREEN}[5]{Style.RESET_ALL} 50 emails (Daily Limit)")
+    print(f"  {Fore.GREEN}[6]{Style.RESET_ALL} Custom number")
     
-    choice = input(f"\n{Fore.CYAN}{Style.BRIGHT}[>] Choose (1-11): {Style.RESET_ALL}").strip()
+    choice = input(f"\n{Fore.CYAN}{Style.BRIGHT}[>] Choose (1-6): {Style.RESET_ALL}").strip()
     
-    count_map = {
-        '1': 10, '2': 50, '3': 100, '4': 200, '5': 500,
-        '6': 600, '7': 700, '8': 800, '9': 900, '10': 1000
-    }
+    count_map = {'1': 10, '2': 20, '3': 30, '4': 40, '5': 50}
     
     if choice in count_map:
         num_emails = count_map[choice]
@@ -181,6 +193,9 @@ def main():
         num_emails = int(input(f"{Fore.CYAN}{Style.BRIGHT}[>] Enter custom number: {Style.RESET_ALL}").strip())
         if num_emails < 1:
             num_emails = 1
+        if num_emails > 50:
+            print(f"{Fore.YELLOW}[!] Gmail limit is 50 per day. Reducing to 50.{Style.RESET_ALL}")
+            num_emails = 50
     
     print(f"\n{Fore.RED}{Style.BRIGHT}╔════════════════════════════════════════════════════════════════════════╗{Style.RESET_ALL}")
     print(f"{Fore.RED}{Style.BRIGHT}║{Style.RESET_ALL}                      ⚠️  FINAL WARNING ⚠️                           {Fore.RED}{Style.BRIGHT}║{Style.RESET_ALL}")
@@ -204,3 +219,4 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         print(f"\n\n{Fore.YELLOW}{Style.BRIGHT}[!] Stopped by user{Style.RESET_ALL}")
+        sys.exit(0)
