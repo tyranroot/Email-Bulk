@@ -35,7 +35,7 @@
 
 ### 📱 **Termux (Android)**
 ```bash
-pkg update && pkg upgrade -y
+pkg update -y
 pkg install python git -y
 git clone https://github.com/tyranroot/Email-Bulk.git
 cd Email-Bulk
