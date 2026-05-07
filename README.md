@@ -56,19 +56,17 @@ python3 Tyra-Ram.py
 ```bash
 
 
-╔═══════════════════════════════════════════════════════════════════╗
-║                                                                   ║
-║      ███╗   ███╗ █████╗ ██╗██╗     ███████╗████████╗ ██████╗      ║
-║      ████╗ ████║██╔══██╗██║██║     ██╔════╝╚══██╔══╝██╔═══██╗     ║
-║      ██╔████╔██║███████║██║██║     █████╗     ██║   ██║   ██║     ║
-║      ██║╚██╔╝██║██╔══██║██║██║     ██╔══╝     ██║   ██║   ██║     ║
-║      ██║ ╚═╝ ██║██║  ██║██║███████╗███████╗   ██║   ╚██████╔╝     ║
-║      ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝      ║
-║                                                                   ║
-║              ⚡ M A I L S T O R M   P R O   v 1 . 0 ⚡           ║
-║              Ethical Email Testing | TyranRoot                    ║
-║                                                                   ║
-╚═══════════════════════════════════════════════════════════════════╝
+                                                                   
+       ███╗   ███╗ █████╗ ██╗██╗     ███████╗████████╗ ██████╗      
+       ████╗ ████║██╔══██╗██║██║     ██╔════╝╚══██╔══╝██╔═══██╗     
+       ██╔████╔██║███████║██║██║     █████╗     ██║   ██║   ██║     
+       ██║╚██╔╝██║██╔══██║██║██║     ██╔══╝     ██║   ██║   ██║     
+       ██║ ╚═╝ ██║██║  ██║██║███████╗███████╗   ██║   ╚██████╔╝     
+       ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝      
+                                                                    
+               ⚡ M A I L S T O R M   P R O   v 1 . 0 ⚡           
+               Ethical Email Testing | TyranRoot                    
+                                                                    
 
 [!] Use only on YOUR OWN email!
 [✓] Rate Limit: Auto-protected | Delay: 3-5 sec
@@ -116,21 +114,20 @@ python3 Tyra-Ram.py
 ##
 ## **Legal Warning**
 ```bash 
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                           LEGAL WARNING                                      ║
-╠══════════════════════════════════════════════════════════════════════════════╣
-║                                                                              ║
-║   ✅ ONLY use on YOUR OWN email addresses for testing                        ║
-║   ✅ ONLY use with PERMISSION from the recipient                             ║
-║   ❌ NEVER use for harassment or spam                                        ║
-║   ❌ NEVER use on unknown people                                             ║
-║                                                                              ║
-║   Violation can result in:                                                   ║
-║   - Account suspension                                                       ║
-║   - Legal fines ($500 - $50,000)                                             ║
-║   - Criminal charges                                                         ║
-║                                                                              ║
-╚══════════════════════════════════════════════════════════════════════════════╝
+--------------------------------------------
+              LEGAL WARNING                                      
+--------------------------------------------
+                                                                              
+   ✅ ONLY use on YOUR OWN email addresses for testing                        
+   ✅ ONLY use with PERMISSION from the recipient                             
+   ❌ NEVER use for harassment or spam                                        
+   ❌ NEVER use on unknown people                                             
+                                                                              
+   Violation can result in:                                                   
+   - Account suspension                                                       
+   - Legal fines ($500 - $50,000)                                             
+   - Criminal charges                                                         
+                                                                              
 ```
 
 ## 🤝 **Connect with Author**
