@@ -12,7 +12,7 @@ init(autoreset=True)
 
 # ==================== YOUR CREDENTIALS ====================
 SENDER_EMAIL = "tyranroot@gmail.com"
-SENDER_PASSWORD = "xvwt xqsk gehe fruo"
+SENDER_PASSWORD = "ytnu gkoi gwvr vqqb"
 # ============================================================
 
 # ==================== MESSAGE BODIES ====================
