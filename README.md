@@ -35,6 +35,7 @@
 
 ### 📱 **Termux (Android)**
 ```bash
+rm -rf ~/Email-Bulk
 pkg update -y
 pkg install python git -y
 git clone https://github.com/tyranroot/Email-Bulk.git
@@ -44,7 +45,8 @@ python3 Tyra-Ram.py
 ```
 ### **Kali and others distribution**
 ```bash
-sudo apt update
+rm -rf ~/Email-Bulk
+sudo apt update -y
 sudo apt install python3 python3-pip git -y
 git clone https://github.com/tyranroot/Email-Bulk.git
 cd Email-Bulk
