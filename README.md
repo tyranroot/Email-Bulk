@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📧 MAILSTORM PRO 🔥
+# 📧 Email-Bulk 🔥
 
 ### *Professional Email Stress Testing Tool*
 
