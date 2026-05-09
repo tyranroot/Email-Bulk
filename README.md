@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📧 Email-Bulk 🔥
+# 📧 Email Bulk 🔥
 
 ### *Professional Email Stress Testing Tool*
 
@@ -11,7 +11,7 @@
 
 ## 📌 **Overview**
 
-**MailStorm Pro** is a professional-grade email stress testing tool designed for **educational and authorized testing purposes only**. It allows you to send multiple emails with **randomized content**, **dynamic subjects**, and **multi-threaded performance**.
+**Email Bulk** is a professional-grade email stress testing tool designed for **educational and authorized testing purposes only**. It allows you to send multiple emails with **randomized content**, **dynamic subjects**, and **multi-threaded performance**.
 
 > ⚠️ **IMPORTANT**: This tool is for **YOUR OWN EMAIL TESTING** only. Unauthorized use is **ILLEGAL** and strictly prohibited.
 
