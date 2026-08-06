@@ -12,7 +12,7 @@ init(autoreset=True)
 
 # ==================== YOUR CREDENTIALS ====================
 SENDER_EMAIL = "tyranroot@gmail.com"
-SENDER_PASSWORD = "vyjr axtx ztgx ptvq"
+SENDER_PASSWORD = "lzvn bokf dagt tacw"
 # ============================================================
 
 # ==================== MESSAGE BODIES ====================
@@ -66,8 +66,8 @@ def banner():
        ██║╚██╔╝██║██╔══██║██║██║     ██╔══╝     ██║   ██║   ██║     
        ██║ ╚═╝ ██║██║  ██║██║███████╗███████╗   ██║   ╚██████╔╝     
        ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝                                    
-               ⚡ M A I L S T O R M   P R O   v 1 . 0 ⚡             
-               Ethical Email Testing | TyraxZero                    
+               ⚡ M A I L S T O R M   P R O ⚡             
+               Ethical Email Testing | TyranRoot                 
                                                                      
 {Style.RESET_ALL}""")
     print(f"{Fore.YELLOW}{Style.BRIGHT}[!] Use only on YOUR OWN email!{Style.RESET_ALL}")
